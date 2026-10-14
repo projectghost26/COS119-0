@@ -7,7 +7,7 @@ enum class ArtPalette {
 };
 
 class VoidBearer {
-private:
+protected:
     std::string name;
     int health;
     int maxHealth;

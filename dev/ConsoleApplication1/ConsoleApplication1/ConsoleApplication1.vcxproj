@@ -140,6 +140,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Crow.cpp" />
     <ClCompile Include="Nighthawk Sim.cpp" />
   </ItemGroup>
   <ItemGroup>
