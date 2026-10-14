@@ -18,10 +18,10 @@ add her four arts:
    Character player("Eagle", 125, 15, 10);
 */
 
-class Crow : public VoidBearer {
+class Eagle : public VoidBearer {
 public:
     // Constructor
-    Crow(std::string name, int hp, int atk, int def);
+    Eagle(std::string name, int hp, int atk, int def);
 
     // --- STABILIZED ART PALETTE (2 Skills) ---
     void stabilizedSkillOne(VoidBearer& target);
