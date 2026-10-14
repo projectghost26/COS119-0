@@ -15,7 +15,7 @@ add her four arts:
   Dialogue line: "LETS MAKE THE WORLD BRIGHTER"
 
   Stats:
-   Character player("Crow", 150, 30, 15);
+   Character player("Crow", 150, 35, 15);
 */
 
 class Crow : public VoidBearer {

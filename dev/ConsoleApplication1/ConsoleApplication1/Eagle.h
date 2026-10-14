@@ -3,7 +3,7 @@
 /*ToDo for Eagle:
 add her four arts:
 * Stabilzed arts:
-  Windswepy- One hit
+  Windswept- One hit
   Dialogue line: "Sorry did i trip you"
   Calming Wind- Heal 5hp
   Dialouge line- "You aint killin me just yet"
