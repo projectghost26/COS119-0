@@ -24,10 +24,10 @@ public:
     Eagle(std::string name, int hp, int atk, int def);
 
     // --- STABILIZED ART PALETTE (2 Skills) ---
-    void stabilizedSkillOne(VoidBearer& target);
-    void stabilizedSkillTwo(VoidBearer& target);
+    void Windswept(VoidBearer& target);
+    void CalmingWind(VoidBearer& target);
 
     // --- REVERBED ART PALETTE (2 Skills) ---
-    void reverbedSkillOne(VoidBearer& target);
-    void reverbedSkillTwo(VoidBearer& target);
+    void RadianceBlaze(VoidBearer& target);
+    void Wildfire(VoidBearer& target);
 };

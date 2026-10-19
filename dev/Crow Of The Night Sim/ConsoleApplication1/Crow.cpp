@@ -19,7 +19,7 @@ void Crow::BreakthroughEdge(VoidBearer& target) {
         return;
     }
 
-    std::cout << "\n\"BREAK... TRHOUGH\" - " << getName() << " executes **Breakthrough Edge**!\n";
+    std::cout << "\n\"BREAK... TRHOUGH\" - " << getName() << " casts **Breakthrough Edge**!\n";
 
     // 1 Hit Attack
     int damage = attackPower + 10;
@@ -62,6 +62,9 @@ void Crow::ChromaFlux(VoidBearer& target) {
     std::cout << "Hit 2: ";
     int hitTwo = attackPower / 2 + (rand() % 5);
     target.takeDamage(hitTwo);
+
+    std::cout << target.getName() << "'s colors shift\n";
+
 }
 
 void Crow::HueShift(VoidBearer& target) {

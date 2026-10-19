@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Crow.cpp" />
+    <ClCompile Include="Eagle.cpp" />
     <ClCompile Include="Nighthawk Sim.cpp" />
   </ItemGroup>
   <ItemGroup>

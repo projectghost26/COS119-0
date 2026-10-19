@@ -21,6 +21,9 @@
     <ClCompile Include="Crow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Eagle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Crow.h">

@@ -1,10 +1,10 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "d:\\school\\cos\\dev\\consoleapplication1\\consoleapplication1\\eagle.h",
+        "Source": "d:\\school\\cos\\dev\\crow of the night sim\\consoleapplication1\\eagle.h",
         "ProvidedModule": "",
         "Includes": [
-            "d:\\school\\cos\\dev\\consoleapplication1\\consoleapplication1\\voidbearer.h",
+            "d:\\school\\cos\\dev\\crow of the night sim\\consoleapplication1\\voidbearer.h",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\string",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\yvals_core.h",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\vcruntime.h",
