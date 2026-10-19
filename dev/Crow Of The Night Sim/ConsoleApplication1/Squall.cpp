@@ -3,6 +3,9 @@
 #include <cstdlib>
 
 // Constructor initializes Squall and sets invulnerability flag to false
+Squall::Squall()
+    : VoidBearer("Squall", 175, 30, 30), invulnerableNextTurn(false) {
+}
 Squall::Squall(std::string name, int hp, int atk, int def)
     : VoidBearer(name, hp, atk, def), invulnerableNextTurn(false) {
 }

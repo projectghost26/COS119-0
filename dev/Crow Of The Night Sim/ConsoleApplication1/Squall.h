@@ -23,6 +23,7 @@ private:
     bool invulnerableNextTurn;
 public:
     // Constructor
+    Squall();
     Squall(std::string name, int hp, int atk, int def);
 
     // Override takeDamage to intercept attacks when invulnerable

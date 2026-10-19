@@ -21,6 +21,7 @@ add her four arts:
 class Eagle : public VoidBearer {
 public:
     // Constructor
+    Eagle();
     Eagle(std::string name, int hp, int atk, int def);
 
     // --- STABILIZED ART PALETTE (2 Skills) ---

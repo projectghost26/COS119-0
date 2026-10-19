@@ -2,7 +2,9 @@
 #include <iostream>
 #include <cstdlib>
 
-// Constructor taking name, hp, atk, and def as defined in Eagle.h
+// Constructor taking name, hp, atk, and def 
+Eagle::Eagle() : VoidBearer("Eagle", 125, 15, 10) {}
+
 Eagle::Eagle(std::string name, int hp, int atk, int def)
     : VoidBearer(name, hp, atk, def) {
 }

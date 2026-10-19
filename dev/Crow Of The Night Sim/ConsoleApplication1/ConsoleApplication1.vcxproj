@@ -143,6 +143,7 @@
     <ClCompile Include="Crow.cpp" />
     <ClCompile Include="Eagle.cpp" />
     <ClCompile Include="Nighthawk Sim.cpp" />
+    <ClCompile Include="Raven.cpp" />
     <ClCompile Include="Squall.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -31,4 +31,14 @@ public:
 
     virtual void executeSkillOne(VoidBearer& target);
     virtual void executeSkillTwo(VoidBearer& target);
+
+    //health cap debuff for Raven
+    void reduceMaxHealth(int percentage) {
+        int reduction = maxHealth * percentage / 100;
+        maxHealth -= reduction;
+        if (health > maxHealth) {
+            health = maxHealth; // Clamp current health if it exceeds new max
+        }
+        std::cout << name << "'s Max Health is reduced! (New Max HP: " << maxHealth << ")\n";
+    }
 };
