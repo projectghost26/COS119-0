@@ -30,6 +30,9 @@
     <ClCompile Include="Raven.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VoidBearer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Crow.h">

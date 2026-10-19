@@ -3,13 +3,26 @@
 #include <cstdlib>
 
 // Default constructor using Raven's exact stats: 75 HP, 45 Attack, 5 Defense[cite: 8]
-Raven::Raven()
-    : VoidBearer("Raven", 75, 45, 5), hasDoppleganger(false) {
-}
 
-// Parameterized constructor
 Raven::Raven(std::string name, int hp, int atk, int def)
     : VoidBearer(name, hp, atk, def), hasDoppleganger(false) {
+}
+void Raven::executeSkillOne(VoidBearer& target) {
+    if (currentPalette == ArtPalette::Stabilized) {
+        Doppleganger(target);
+    }
+    else {
+        ExistenceErasure(target);
+    }
+}
+
+void Raven::executeSkillTwo(VoidBearer& target) {
+    if (currentPalette == ArtPalette::Stabilized) {
+        ShadowStrike(target);
+    }
+    else {
+        NullAndVoid(target);
+    }
 }
 
 // Switching art palettes clears the Doppleganger effect

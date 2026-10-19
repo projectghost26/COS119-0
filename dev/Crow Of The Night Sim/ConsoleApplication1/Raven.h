@@ -23,8 +23,11 @@ private:
     bool hasDoppleganger; // Tracks the extra attack instance state
 public:
     // Constructor
-    Raven();
+    
     Raven(std::string name, int hp, int atk, int def);
+
+    void executeSkillOne(VoidBearer& target) override;
+    void executeSkillTwo(VoidBearer& target) override;
 
     void switchPalette(ArtPalette newPalette);
     // --- STABILIZED ART PALETTE (2 Skills) ---

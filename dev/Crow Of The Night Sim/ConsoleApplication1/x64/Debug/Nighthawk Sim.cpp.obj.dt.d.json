@@ -127,7 +127,13 @@
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\ctype.h",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\clocale",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\locale.h",
-            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\ostream"
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\ostream",
+            "d:\\school\\cos\\dev\\crow of the night sim\\consoleapplication1\\raven.h",
+            "d:\\school\\cos\\dev\\crow of the night sim\\consoleapplication1\\voidbearer.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\string",
+            "d:\\school\\cos\\dev\\crow of the night sim\\consoleapplication1\\eagle.h",
+            "d:\\school\\cos\\dev\\crow of the night sim\\consoleapplication1\\squall.h",
+            "d:\\school\\cos\\dev\\crow of the night sim\\consoleapplication1\\crow.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

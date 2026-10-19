@@ -3,10 +3,26 @@
 #include <cstdlib>
 
 // Constructor taking name, hp, atk, and def 
-Eagle::Eagle() : VoidBearer("Eagle", 125, 15, 10) {}
 
 Eagle::Eagle(std::string name, int hp, int atk, int def)
     : VoidBearer(name, hp, atk, def) {
+}
+void Eagle::executeSkillOne(VoidBearer& target) {
+    if (currentPalette == ArtPalette::Stabilized) {
+        Windswept(target);
+    }
+    else {
+        RadianceBlaze(target);
+    }
+}
+
+void Eagle::executeSkillTwo(VoidBearer& target) {
+    if (currentPalette == ArtPalette::Stabilized) {
+        CalmingWind(target);
+    }
+    else {
+        Wildfire(target);
+    }
 }
 
 // ==========================================

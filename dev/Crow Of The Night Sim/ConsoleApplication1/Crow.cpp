@@ -3,10 +3,26 @@
 #include <cstdlib>
 
 // Constructor using Crow's exact stats: 150 HP, 35 Attack, 15 Defense
-Crow::Crow() : VoidBearer("Crow", 150, 35, 15) {}
 
 Crow::Crow(std::string name, int hp, int atk, int def)
     : VoidBearer(name, hp, atk, def) {
+}
+void Crow::executeSkillOne(VoidBearer& target) {
+    if (getCurrentPalette() == ArtPalette::Stabilized) {
+        BreakthroughEdge(target);
+    }
+    else {
+        ChromaFlux(target);
+    }
+}
+
+void Crow::executeSkillTwo(VoidBearer& target) {
+    if (getCurrentPalette() == ArtPalette::Stabilized) {
+        StormFlare(target);
+    }
+    else {
+        HueShift(target);
+    }
 }
 
 // ==========================================

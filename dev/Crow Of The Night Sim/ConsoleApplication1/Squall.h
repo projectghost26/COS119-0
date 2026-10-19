@@ -23,11 +23,13 @@ private:
     bool invulnerableNextTurn;
 public:
     // Constructor
-    Squall();
+    
     Squall(std::string name, int hp, int atk, int def);
 
     // Override takeDamage to intercept attacks when invulnerable
     void takeDamage(int damage) override;
+    void executeSkillOne(VoidBearer& target) override;
+    void executeSkillTwo(VoidBearer& target) override;
 
     // --- STABILIZED ART PALETTE (2 Skills) ---
     void GlacialDefence(VoidBearer& target);

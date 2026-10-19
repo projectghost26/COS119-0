@@ -3,13 +3,27 @@
 #include <cstdlib>
 
 // Constructor initializes Squall and sets invulnerability flag to false
-Squall::Squall()
-    : VoidBearer("Squall", 175, 30, 30), invulnerableNextTurn(false) {
-}
+
 Squall::Squall(std::string name, int hp, int atk, int def)
-    : VoidBearer(name, hp, atk, def), invulnerableNextTurn(false) {
+    : VoidBearer(name, hp, atk, def) {
+}
+void Squall::executeSkillOne(VoidBearer& target) {
+    if (currentPalette == ArtPalette::Stabilized) {
+        GlacialDefence(target);
+    }
+    else {
+        MetalRing(target);
+    }
 }
 
+void Squall::executeSkillTwo(VoidBearer& target) {
+    if (currentPalette == ArtPalette::Stabilized) {
+        ArcticHook(target);
+    }
+    else {
+        Headshaker(target);
+    }
+}
 // Overridden takeDamage handles the "no damage on next turn" effect
 void Squall::takeDamage(int damage) {
     if (invulnerableNextTurn) {
