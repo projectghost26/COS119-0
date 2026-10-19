@@ -30,7 +30,7 @@ void Eagle::CalmingWind(VoidBearer& target) {
         return;
     }
 
-    // Dialogue line and 5 HP heal mechanic[cite: 5]
+    // Dialogue line and 5 HP heal mechanic
     std::cout << "\n\"You aint killin me just yet\" - " << name << " casts **Calming Wind**!\n";
 
     health += 5;
@@ -50,7 +50,7 @@ void Eagle::RadianceBlaze(VoidBearer& target) {
         return;
     }
 
-    // Dialogue line and 4-hit multi-strike[cite: 5]
+    // Dialogue line and 4-hit multi-strike
     std::cout << "\n\"AAAAND BURN\" - " << name << " unleashes **Radiance Blaze**!\n";
 
     for (int i = 1; i <= 4; ++i) {
@@ -59,7 +59,7 @@ void Eagle::RadianceBlaze(VoidBearer& target) {
         target.takeDamage(hitDamage);
     }
 
-    // 5% chance of damage over time check[cite: 5]
+    // 5% chance of damage over time check
     int dotRoll = rand() % 100;
     if (dotRoll < 5) {
         std::cout << target.getName() << " is scorched, suffering from a Void Burn, causing Damage over Time\n";
@@ -72,7 +72,7 @@ void Eagle::Wildfire(VoidBearer& target) {
         return;
     }
 
-    // Dialogue line, 1 hit, and attack-down effect[cite: 5]
+    // Dialogue line, 1 hit, and attack-down effect
     std::cout << "\n\"Feelin Hot yet?\" - " << name << " casts **Wildfire**!\n";
 
     int damage = attackPower + 8;
