@@ -3,8 +3,8 @@
 /*ToDo for Raven:
 add her four arts:
 * Stabilzed arts:
-  Doppleganger- prevents one hit of damage
-  Dialogue line: "Wrong one"
+  Doppleganger- adds an additional attack instance, goes away after an attack/art or when switching art palettes
+  Dialogue line: "seeing double?"
   ShadowStrike- 2 hits
   Dialouge line- "Strike from the shadows!"
 
@@ -19,15 +19,22 @@ add her four arts:
 */
 
 class Raven : public VoidBearer {
+private:
+    bool hasDoppleganger; // Tracks the extra attack instance state
 public:
     // Constructor
+    
     Raven(std::string name, int hp, int atk, int def);
 
+    void executeSkillOne(VoidBearer& target) override;
+    void executeSkillTwo(VoidBearer& target) override;
+
+    void switchPalette(ArtPalette newPalette);
     // --- STABILIZED ART PALETTE (2 Skills) ---
-    void stabilizedSkillOne(VoidBearer& target);
-    void stabilizedSkillTwo(VoidBearer& target);
+    void Doppleganger(VoidBearer& target);
+    void ShadowStrike(VoidBearer& target);
 
     // --- REVERBED ART PALETTE (2 Skills) ---
-    void reverbedSkillOne(VoidBearer& target);
-    void reverbedSkillTwo(VoidBearer& target);
+    void ExistenceErasure(VoidBearer& target);
+    void NullAndVoid(VoidBearer& target);
 };

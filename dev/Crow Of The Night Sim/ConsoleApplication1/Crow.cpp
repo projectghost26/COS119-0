@@ -3,10 +3,26 @@
 #include <cstdlib>
 
 // Constructor using Crow's exact stats: 150 HP, 35 Attack, 15 Defense
-Crow::Crow() : VoidBearer("Crow", 150, 35, 15) {}
 
 Crow::Crow(std::string name, int hp, int atk, int def)
     : VoidBearer(name, hp, atk, def) {
+}
+void Crow::executeSkillOne(VoidBearer& target) {
+    if (getCurrentPalette() == ArtPalette::Stabilized) {
+        BreakthroughEdge(target);
+    }
+    else {
+        ChromaFlux(target);
+    }
+}
+
+void Crow::executeSkillTwo(VoidBearer& target) {
+    if (getCurrentPalette() == ArtPalette::Stabilized) {
+        StormFlare(target);
+    }
+    else {
+        HueShift(target);
+    }
 }
 
 // ==========================================
@@ -19,7 +35,7 @@ void Crow::BreakthroughEdge(VoidBearer& target) {
         return;
     }
 
-    std::cout << "\n\"BREAK... TRHOUGH\" - " << getName() << " executes **Breakthrough Edge**!\n";
+    std::cout << "\n\"BREAK... TRHOUGH\" - " << getName() << " casts **Breakthrough Edge**!\n";
 
     // 1 Hit Attack
     int damage = attackPower + 10;
@@ -62,6 +78,9 @@ void Crow::ChromaFlux(VoidBearer& target) {
     std::cout << "Hit 2: ";
     int hitTwo = attackPower / 2 + (rand() % 5);
     target.takeDamage(hitTwo);
+
+    std::cout << target.getName() << "'s colors shift\n";
+
 }
 
 void Crow::HueShift(VoidBearer& target) {

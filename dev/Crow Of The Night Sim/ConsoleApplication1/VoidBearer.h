@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 // Voidbearer template For the 4 Operatives
 enum class ArtPalette {
     Stabilized,
@@ -16,7 +17,8 @@ protected:
     ArtPalette currentPalette;
 
 public:
-    VoidBearer(std::string charName, int hp, int atk, int def);
+    VoidBearer();
+    VoidBearer( const std::string& charName, int hp, int atk, int def);
     virtual ~VoidBearer() = default; // Virtual destructor for inheritance
 
     std::string getName() const;
@@ -29,6 +31,16 @@ public:
     virtual void takeDamage(int damage);
 
 
-    virtual void executeSkillOne(VoidBearer& target);
-    virtual void executeSkillTwo(VoidBearer& target);
+    virtual void executeSkillOne(VoidBearer& target) = 0;
+    virtual void executeSkillTwo(VoidBearer& target) = 0;
+
+    //health cap debuff for Raven
+    void reduceMaxHealth(int percentage) {
+        int reduction = maxHealth * percentage / 100;
+        maxHealth -= reduction;
+        if (health > maxHealth) {
+            health = maxHealth; // Clamp current health if it exceeds new max
+        }
+        std::cout << name << "'s Max Health is reduced! (New Max HP: " << maxHealth << ")\n";
+    }
 };
