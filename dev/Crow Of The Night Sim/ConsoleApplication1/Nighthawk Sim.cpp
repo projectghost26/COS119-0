@@ -1,10 +1,14 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <vector>
+#include <string>
 #include "Raven.h"
 #include "Eagle.h"
 #include "Squall.h"
 #include "Crow.h"
 
-VoidBearer* createRandomCharacterEnemy() {
+VoidBearer* createRandomCharacterEnemy(int id = 1) {
     int enemyChoice = std::rand() % 4;
 
     switch (enemyChoice) {
@@ -20,7 +24,8 @@ VoidBearer* createRandomCharacterEnemy() {
 }
 
 int main()
-{
+{ 
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
     std::string userName;
 
     std::cout << "Hello Early Bird, I am yours truely Eagle and before you ask Yes i made the eagle eye you are using right now.\n";
@@ -73,19 +78,30 @@ int main()
         std::cout << "\n[Eagle Eye]: Operative Eagle deployed.\n [Eagle}: heh of course you'd choose me ill keep you safe\n";
         break;
     }
-
+    bool running = true;
+    int enemyCountMode = 1; // 1 = Standard 1v1, 2 = Additional enemy (1v2)
     // --- COMBAT SIMULATION INITIALIZATION ---
     std::cout << "\n========================================\n";
     std::cout << "       SIMULATION COMBAT INITIATED      \n";
     std::cout << "========================================\n";
     std::cout << "[Eagle Eye]: Spawning combat training hologram...\n\n";
+    std::vector<VoidBearer*> enemies;
+    for (int i = 1; i <= enemyCountMode; ++i) {
+        enemies.push_back(createRandomCharacterEnemy(i));
+    }
+
+    for (size_t i = 0; i < enemies.size(); ++i) {
+        std::cout << "[Eagle Eye]: Target " << (i + 1) << " acquired -> " << enemies[i]->getName() << " (HP: " << enemies[i]->getHealth() << ")\n";
+    }
+
+    bool battleActive = true;
 
     // Create a training dummy/enemy operative to fight
     VoidBearer* enemy = createRandomCharacterEnemy();
     std::cout << "[Eagle Eye]: Target acquired -> " << enemy->getName() << "\n";
 
-    // Simple turn-based loop
-    while (true) {
+    // combat
+    while (battleActive) {
         std::cout << "\n----------------------------------------\n";
         std::cout << "YOUR TURN (HP: " << player->getHealth() << "):\n";
         std::cout << "1. Execute Skill One\n";
@@ -96,14 +112,53 @@ int main()
         int action;
         std::cin >> action;
 
-        if (action == 1) {
-            player->executeSkillOne(*enemy);
-        }
-        else if (action == 2) {
-            player->executeSkillTwo(*enemy);
+        if (action == 1 || action == 2) {
+            if (enemies.empty()) {
+                battleActive = false;
+                break;
+            }
+            VoidBearer* target = nullptr;
+            if (enemies.size() == 1) {
+                target = enemies[0];
+            }
+            else {
+                std::cout << "\nSelect Target:\n";
+                for (size_t i = 0; i < enemies.size(); ++i) {
+                    std::cout << (i + 1) << ". " << enemies[i]->getName() << " (HP: " << enemies[i]->getHealth() << ")\n";
+                }
+                int targetChoice;
+                std::cout << "Enter target number (1-" << enemies.size() << "): ";
+                std::cin >> targetChoice;
+
+                if (targetChoice >= 1 && targetChoice <= static_cast<int>(enemies.size())) {
+                    target = enemies[targetChoice - 1];
+                }
+                else {
+                    target = enemies[0];
+                    std::cout << "Invalid choice. Defaulting to target 1.\n";
+                }
+            }
+
+            if (action == 1) {
+                player->executeSkillOne(*target);
+            }
+            else {
+                player->executeSkillTwo(*target);
+            }
+
+            // Clean up defeated enemies
+            for (auto it = enemies.begin(); it != enemies.end(); ) {
+                if ((*it)->getHealth() <= 0) {
+                    std::cout << "\n[Eagle Eye]: " << (*it)->getName() << " has been neutralized!\n";
+                    delete* it;
+                    it = enemies.erase(it);
+                }
+                else {
+                    ++it;
+                }
+            }
         }
         else if (action == 3) {
-            // Toggle palette state
             if (player->getCurrentPalette() == ArtPalette::Stabilized) {
                 player->switchPalette(ArtPalette::Reverbed);
                 std::cout << player->getName() << " shifted palette to **Reverbed**!\n";
@@ -112,23 +167,24 @@ int main()
                 player->switchPalette(ArtPalette::Stabilized);
                 std::cout << player->getName() << " shifted palette to **Stabilized**!\n";
             }
-            continue; // Skip enemy turn on palette shift
+            continue;
         }
         else {
             std::cout << "Invalid action. Turn skipped!\n";
+            continue;
         }
         if (enemy->getHealth() <= 0) {
             std::cout << "\n========================================\n";
             std::cout << "       SIMULATION CLEARED: VICTORY!     \n";
             std::cout << "========================================\n";
             std::cout << "[Eagle Eye]: Training hologram neutralized! Outstanding performance," << userName << ".\n";
-            break;
         }
         // Check if enemy is defeated (placeholder check using basic output or standard flow)
         std::cout << "\n[Eagle Eye]: Hologram status stable. Counter-attacking...\n";
 
         // Enemy retaliates back against the player
         int enemyMove = std::rand() % 100;
+        if (enemy->getHealth() <= 0) continue;
         if (enemyMove < 25) { // 25% chance to toggle palette
             if (enemy->getCurrentPalette() == ArtPalette::Stabilized) {
                 enemy->switchPalette(ArtPalette::Reverbed);
@@ -156,9 +212,40 @@ int main()
             std::cout << "========================================\n";
             std::cout << "[Eagle Eye]: Vital signs flatlining... Better luck Next Time litle" << userName << ".\n";
             break;
-        
+
+        }
+
+        for (auto* enemy : enemies) {
+            delete enemy;
+        }
+        enemies.clear();
+
     }
+    int postChoice;
+    std::cout << "\n========================================\n";
+    std::cout << "         SIMULATION CONCLUDED           \n";
+    std::cout << "========================================\n";
+    std::cout << "1.Rematch\n";
+    std::cout << "2.Increase Challenge\n";
+    std::cout << "3. End simulation\n";
+    std::cout << "Enter your choice (1-3): ";
+    std::cin >> postChoice;
+
+    if (postChoice == 1) {
+        enemyCountMode = 1;
+        std::cout << "\n[Eagle Eye]: Rebooting standard simulation...\n";
     }
+    else if (postChoice == 2) {
+        enemyCountMode = 2;
+        std::cout << "\n[Eagle Eye]: Challenge increase additional enemy deployed...\n";
+    }
+    else {
+        running = false;
+        std::cout << "\n[Eagle Eye]: Shutting down Nighthawk simulation. Farewell, " << userName << ".\n";
+    }
+    
+       
+    
 
     // Clean up dynamic memory before exiting
     delete player;
