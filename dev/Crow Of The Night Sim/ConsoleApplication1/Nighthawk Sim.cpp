@@ -4,6 +4,20 @@
 #include "Squall.h"
 #include "Crow.h"
 
+VoidBearer* createRandomCharacterEnemy() {
+    int enemyChoice = std::rand() % 4;
+
+    switch (enemyChoice) {
+    case 0:
+        return new Crow("Crow projection", 150, 35, 15);
+    case 1:
+        return new Raven("Raven projection", 75, 45, 5);
+    case 2:
+        return new Squall("Squall projection", 150, 20, 20);
+    case 3:
+        return new Eagle("Eagle projection", 125, 15, 10);
+    }
+}
 
 int main()
 {
@@ -67,12 +81,13 @@ int main()
     std::cout << "[Eagle Eye]: Spawning combat training hologram...\n\n";
 
     // Create a training dummy/enemy operative to fight
-    Eagle enemy("Simulation Hologram", 100, 20, 10);
+    VoidBearer* enemy = createRandomCharacterEnemy();
+    std::cout << "[Eagle Eye]: Target acquired -> " << enemy->getName() << "\n";
 
     // Simple turn-based loop
     while (true) {
         std::cout << "\n----------------------------------------\n";
-        std::cout << "YOUR TURN:\n";
+        std::cout << "YOUR TURN (HP: " << player->getHealth() << "):\n";
         std::cout << "1. Execute Skill One\n";
         std::cout << "2. Execute Skill Two\n";
         std::cout << "3. Switch Art Palette (Stabilized <-> Reverbed)\n";
@@ -82,10 +97,10 @@ int main()
         std::cin >> action;
 
         if (action == 1) {
-            player->executeSkillOne(enemy);
+            player->executeSkillOne(*enemy);
         }
         else if (action == 2) {
-            player->executeSkillTwo(enemy);
+            player->executeSkillTwo(*enemy);
         }
         else if (action == 3) {
             // Toggle palette state
@@ -102,7 +117,7 @@ int main()
         else {
             std::cout << "Invalid action. Turn skipped!\n";
         }
-        if (enemy.getHealth() <= 0) {
+        if (enemy->getHealth() <= 0) {
             std::cout << "\n========================================\n";
             std::cout << "       SIMULATION CLEARED: VICTORY!     \n";
             std::cout << "========================================\n";
@@ -113,8 +128,26 @@ int main()
         std::cout << "\n[Eagle Eye]: Hologram status stable. Counter-attacking...\n";
 
         // Enemy retaliates back against the player
-        int enemyDamage = 15;
-        player->takeDamage(enemyDamage);
+        int enemyMove = std::rand() % 100;
+        if (enemyMove < 25) { // 25% chance to toggle palette
+            if (enemy->getCurrentPalette() == ArtPalette::Stabilized) {
+                enemy->switchPalette(ArtPalette::Reverbed);
+                std::cout << enemy->getName() << " shifts their Art Palette to Reverbed!\n";
+            }
+            else {
+                enemy->switchPalette(ArtPalette::Stabilized);
+                std::cout << enemy->getName() << " shifts their Art Palette to Stabilized!\n";
+            }
+        }
+        else {
+            int skillChoice = (std::rand() % 2) + 1;
+            if (skillChoice == 1) {
+                enemy->executeSkillOne(*player);
+            }
+            else {
+                enemy->executeSkillTwo(*player);
+            }
+        }
 
         // Break condition check could go here if health pools drop below 0
         if (player->getHealth() <= 0) {
@@ -129,7 +162,9 @@ int main()
 
     // Clean up dynamic memory before exiting
     delete player;
+    delete enemy;
     player = nullptr;
+    enemy = nullptr;
 
     return 0;
 }
