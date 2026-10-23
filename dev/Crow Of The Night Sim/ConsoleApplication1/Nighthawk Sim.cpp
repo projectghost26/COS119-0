@@ -63,7 +63,10 @@ int main()
     }
     else if (userName == "Natasha") {
         std::cout << "oh neat i had an old friend with the same name, Anyway\n";
-    }
+    }else if(userName == "Shieun"){
+        std::cout << "OHHHHH HELL NO GET OUUUUUUUUUT";
+            return 0;
+}
     std::cout << "Welcome " << userName << " to Nighthawk. Dont worry Your name wont be saved to everyone's Eagle Eye just your own\n";
     std::cout << "Now its time to make your choice, which operative template do you choose? \n";
     std::cout << "========================================\n";
