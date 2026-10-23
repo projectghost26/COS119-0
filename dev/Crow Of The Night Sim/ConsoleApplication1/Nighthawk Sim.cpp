@@ -96,9 +96,7 @@ int main()
 
     bool battleActive = true;
 
-    // Create a training dummy/enemy operative to fight
-    VoidBearer* enemy = createRandomCharacterEnemy();
-    std::cout << "[Eagle Eye]: Target acquired -> " << enemy->getName() << "\n";
+  
 
     // combat
     while (battleActive) {
@@ -173,36 +171,36 @@ int main()
             std::cout << "Invalid action. Turn skipped!\n";
             continue;
         }
-        if (enemy->getHealth() <= 0) {
+        if (enemies.empty()) {
             std::cout << "\n========================================\n";
             std::cout << "       SIMULATION CLEARED: VICTORY!     \n";
             std::cout << "========================================\n";
             std::cout << "[Eagle Eye]: Training hologram neutralized! Outstanding performance," << userName << ".\n";
         }
         // Check if enemy is defeated (placeholder check using basic output or standard flow)
-        std::cout << "\n[Eagle Eye]: Hologram status stable. Counter-attacking...\n";
+        for (auto* foe : enemies) {
+            int enemyMove = std::rand() % 100;
+            if (enemyMove < 25) { // 25% chance to toggle palette
+                if (foe->getCurrentPalette() == ArtPalette::Stabilized) {
+                    foe->switchPalette(ArtPalette::Reverbed);
+                    std::cout << foe->getName() << " shifts their Art Palette to Reverbed!\n";
+                }
+                else {
+                    foe->switchPalette(ArtPalette::Stabilized);
+                    std::cout << foe->getName() << " shifts their Art Palette to Stabilized!\n";
+                }
+            }
+            else {
+                int skillChoice = (std::rand() % 2) + 1;
+                if (skillChoice == 1) {
+                    foe->executeSkillOne(*player);
+                }
+                else {
+                    foe->executeSkillTwo(*player);
+                }
+            }
 
-        // Enemy retaliates back against the player
-        int enemyMove = std::rand() % 100;
-        if (enemy->getHealth() <= 0) continue;
-        if (enemyMove < 25) { // 25% chance to toggle palette
-            if (enemy->getCurrentPalette() == ArtPalette::Stabilized) {
-                enemy->switchPalette(ArtPalette::Reverbed);
-                std::cout << enemy->getName() << " shifts their Art Palette to Reverbed!\n";
-            }
-            else {
-                enemy->switchPalette(ArtPalette::Stabilized);
-                std::cout << enemy->getName() << " shifts their Art Palette to Stabilized!\n";
-            }
-        }
-        else {
-            int skillChoice = (std::rand() % 2) + 1;
-            if (skillChoice == 1) {
-                enemy->executeSkillOne(*player);
-            }
-            else {
-                enemy->executeSkillTwo(*player);
-            }
+            if (player->getHealth() <= 0) break;
         }
 
         // Break condition check could go here if health pools drop below 0
@@ -215,43 +213,44 @@ int main()
 
         }
 
-        for (auto* enemy : enemies) {
-            delete enemy;
-        }
-        enemies.clear();
-
-    }
-    int postChoice;
-    std::cout << "\n========================================\n";
-    std::cout << "         SIMULATION CONCLUDED           \n";
-    std::cout << "========================================\n";
-    std::cout << "1.Rematch\n";
-    std::cout << "2.Increase Challenge\n";
-    std::cout << "3. End simulation\n";
-    std::cout << "Enter your choice (1-3): ";
-    std::cin >> postChoice;
-
-    if (postChoice == 1) {
-        enemyCountMode = 1;
-        std::cout << "\n[Eagle Eye]: Rebooting standard simulation...\n";
-    }
-    else if (postChoice == 2) {
-        enemyCountMode = 2;
-        std::cout << "\n[Eagle Eye]: Challenge increase additional enemy deployed...\n";
-    }
-    else {
-        running = false;
-        std::cout << "\n[Eagle Eye]: Shutting down Nighthawk simulation. Farewell, " << userName << ".\n";
-    }
-    
        
+
+    }
+
+    if (enemies.empty() or player->getHealth() <= 0) {
+        int postChoice;
+        std::cout << "\n========================================\n";
+        std::cout << "         SIMULATION CONCLUDED           \n";
+        std::cout << "========================================\n";
+        std::cout << "1.Rematch\n";
+        std::cout << "2.Increase Challenge\n";
+        std::cout << "3. End simulation\n";
+        std::cout << "Enter your choice (1-3): ";
+        std::cin >> postChoice;
+
+        if (postChoice == 1) {
+            enemyCountMode = 1;
+            std::cout << "\n[Eagle Eye]: Rebooting standard simulation...\n";
+        }
+        else if (postChoice == 2) {
+            enemyCountMode = 2;
+            std::cout << "\n[Eagle Eye]: Challenge increase additional enemy deployed...\n";
+        }
+        else {
+            running = false;
+            std::cout << "\n[Eagle Eye]: Shutting down Nighthawk simulation. Farewell, " << userName << ".\n";
+        }
+
+    }
     
 
     // Clean up dynamic memory before exiting
+    for (auto* e : enemies) {
+        delete e;
+    }
+    enemies.clear();
     delete player;
-    delete enemy;
     player = nullptr;
-    enemy = nullptr;
 
     return 0;
 }
