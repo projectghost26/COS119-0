@@ -6,7 +6,6 @@ VoidBearer::VoidBearer(const std::string& charName, int hp, int atk, int def)
     : name(charName), health(hp), maxHealth(hp), attackPower(atk), defense(def), currentPalette(ArtPalette::Stabilized) {
 }
 std::string VoidBearer::getName() const { return name; }
-int VoidBearer::getHealth() const { return health; }
 int VoidBearer::getMaxHealth() const { return maxHealth; }
 bool VoidBearer::isAlive() const { return health > 0; }
 ArtPalette VoidBearer::getCurrentPalette() const { return currentPalette; }

@@ -22,7 +22,7 @@ public:
     virtual ~VoidBearer() = default; // Virtual destructor for inheritance
 
     std::string getName() const;
-    int getHealth() const;
+    int getHealth() const { return health; };
     int getMaxHealth() const;
     bool isAlive() const;
     ArtPalette getCurrentPalette() const;
